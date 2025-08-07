@@ -4,4 +4,5 @@ A1 pom.xml中配置springdoc时误删版本号，Maven未能正确管理该依�
 Q2 配置H2数据库时，访问端口重定向到固定页面/login
 A2 pom.xml中暂时注释掉spring security依赖项
 
-Q3
+Q3 将项目上传至git时报错fatal: unable to access URL: Recv failure: Connection was reset
+A3 使用token登录
