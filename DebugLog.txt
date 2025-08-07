@@ -1,0 +1,7 @@
+Q1 创建项目后，错误: 找不到或无法加载主类 com.bigsuika.onlineshop.OnlineShopApplication
+A1 pom.xml中配置springdoc时误删版本号，Maven未能正确管理该依赖，导致项目报错
+
+Q2 配置H2数据库时，访问端口重定向到固定页面/login
+A2 pom.xml中暂时注释掉spring security依赖项
+
+Q3
