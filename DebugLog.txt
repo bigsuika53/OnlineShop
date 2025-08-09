@@ -6,3 +6,15 @@ A2 pom.xml中暂时注释掉spring security依赖项
 
 Q3 将项目上传至git时报错fatal: unable to access URL: Recv failure: Connection was reset
 A3 使用token登录
+
+Q4 创建data.sql初始化数据库时，报错找不到表格product
+A4 在application.properties中添加数据库初始化配置
+
+Q5 运行测试ProductControllerTest时报错
+    java.lang.AssertionError: Status expected:<200> but was:<404>
+    MockHttpServletResponse:
+               Status = 404
+        Error message = No static resource api/products.
+A5 ProductControllerTest中测试路径("/api/products")与ProductController中路径("/api/product")不一致
+
+Q6

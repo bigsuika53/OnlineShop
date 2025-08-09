@@ -1,15 +1,13 @@
 package com.bigsuika.onlineshop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
@@ -19,4 +17,7 @@ public class Product {
 
     private String name;
     private double price;
+    private int stock;
+
+
 }
