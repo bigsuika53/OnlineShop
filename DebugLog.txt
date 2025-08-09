@@ -5,7 +5,7 @@ Q2 配置H2数据库时，访问端口重定向到固定页面/login
 A2 pom.xml中暂时注释掉spring security依赖项
 
 Q3 将项目上传至git时报错fatal: unable to access URL: Recv failure: Connection was reset
-A3 使用token登录
+A3 使用github token登录
 
 Q4 创建data.sql初始化数据库时，报错找不到表格product
 A4 在application.properties中添加数据库初始化配置
@@ -17,4 +17,29 @@ Q5 运行测试ProductControllerTest时报错
         Error message = No static resource api/products.
 A5 ProductControllerTest中测试路径("/api/products")与ProductController中路径("/api/product")不一致
 
-Q6
+Q6 使用id查询商品功能不正常，当使用非法id查询商品时，报错为全局报错，应当报错“product not found"
+A6 控制层ProductController中@GetMapping("/page/{id}")注解应为@GetMapping("/{id}")
+
+Q7 添加全局异常处理功能后，swagger-ui无法正常访问，报错:Fetch error response status is 500 /api-docs
+    Q7-1 确认为GlobalExceptionHandler引起，初步判断为版本不兼容导致ControllerAdvice Bean与Swagger冲突
+A7 在pom.xml中添加依赖管理，强制统一管理Spring依赖版本，swagger-ui正常显示
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>6.1.13</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>6.1.13</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>6.1.13</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+

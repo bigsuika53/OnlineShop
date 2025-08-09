@@ -23,8 +23,9 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
+    // ProductService unit test
     @Test
-    public void getAllProducts_ShouldReturnProducts() throws Exception{
+    public void pS_Test() throws Exception{
         Product product1 = new Product(1, "prodA", 999.99, 10);
         Product product2 = new Product(2, "prodC", 899.99, 15);
         List<Product> products = Arrays.asList(product1, product2);
