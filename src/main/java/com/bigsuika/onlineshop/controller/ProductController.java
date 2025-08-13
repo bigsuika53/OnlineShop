@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,5 +49,33 @@ public class ProductController {
     public Product findProductById(@Parameter(description = "product id", required = true, example = "1")
                                    @PathVariable Long id){
         return productService.getProductById(id);
+    }
+
+    @Operation(summary = "create new product")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product createProduct(
+            @Parameter(description = "product info", required = true)
+            @RequestBody Product product){
+        return productService.createProduct(product);
+    }
+
+    @Operation(summary = "edit exist product")
+    @PutMapping("/{id}")
+    public Product updateProduct(
+            @Parameter(description = "product id", required = true, example = "1")
+            @PathVariable Long id,
+
+            @Parameter(description = "product info", required = true)
+            @RequestBody Product product){
+    return  productService.updateProduct(id, product);}
+
+    @Operation(summary = "delete exist product")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProduct(
+            @Parameter(description = "product id", required = true, example = "1")
+            @PathVariable Long id){
+        productService.deleteProduct(id);
     }
 }

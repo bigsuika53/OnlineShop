@@ -34,4 +34,25 @@ public class ProductService implements IProductService {
     public Page<Product> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
+
+    @Override
+    public Product createProduct(Product product) {
+        product.setId(null); // Force id to be null
+        return productRepository.save(product);
+    }
+
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        Product oldProduct = getProductById(id);
+        oldProduct.setName(product.getName());
+        oldProduct.setPrice(product.getPrice());
+        oldProduct.setStock(product.getStock());
+        return productRepository.save(oldProduct);
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        getProductById(id);
+        productRepository.deleteById(id);
+    }
 }

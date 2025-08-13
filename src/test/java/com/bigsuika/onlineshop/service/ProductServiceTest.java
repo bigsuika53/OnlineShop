@@ -10,8 +10,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,20 +26,52 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-    // ProductService unit test
+    // ProductServiceGetById unit test
     @Test
-    public void pS_Test() throws Exception{
-        Product product1 = new Product(1, "prodA", 999.99, 10);
-        Product product2 = new Product(2, "prodC", 899.99, 15);
-        List<Product> products = Arrays.asList(product1, product2);
+    public void PSGid_Test() throws Exception{
+        Product product = new Product(1L, "prodA", 999.99, 10);
 
-        when(productRepository.findAll()).thenReturn(products);
+        when(productRepository.findById(1L)).thenReturn(Optional.of(product));
 
-        List<Product> result = productService.getAllProducts();
+        Product result = productService.getProductById(1L);
 
-        assertEquals(products, result);
-        assertEquals(2, result.size());
-        assertEquals("prodA", result.get(0).getName());
+        assertEquals("prodA", result.getName());
+    }
+
+    // ProductServiceCreate unit test
+    @Test
+    public void PSC_Test() throws Exception{
+        Product productInfo = new Product(null, "prodU", 999.99, 10);
+        Product product = new Product(100L, "prodU", 999.99, 10);
+
+        when(productRepository.save(any(Product.class))).thenReturn(product);
+
+        Product result = productService.createProduct(productInfo);
+
+        assertEquals(100L, result.getId());
+    }
+
+    // ProductServiceUpdate unit test
+    @Test
+    public void PSU_Test() throws Exception{
+        Product product = new Product(100L, "prodU", 999.99, 10);
+        Product productInfo = new Product(null, "prodV", 233.33, 20);
+
+        when(productRepository.findById(100L)).thenReturn(Optional.of(product));
+        when(productRepository.save(any(Product.class))).thenReturn(product);
+
+        Product result = productService.updateProduct(100L, productInfo);
+
+        assertEquals("prodV", result.getName());
+        assertEquals(233.33, result.getPrice());
+    }
+
+    // ProductServiceDelete unit test
+    @Test
+    public void PSD_Test() throws Exception{
+        productRepository.deleteById(100L);
+
+        verify(productRepository).deleteById(100L);
     }
 
 }

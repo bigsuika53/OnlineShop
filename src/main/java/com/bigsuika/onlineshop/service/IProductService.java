@@ -11,4 +11,8 @@ public interface IProductService {
 
     List<Product> getAllProducts();
     Page<Product> getAllProducts(Pageable pageable);
+
+    Product createProduct(Product product);
+    Product updateProduct(Long id, Product product);
+    void deleteProduct(Long id);
 }

@@ -43,3 +43,11 @@ A7 在pom.xml中添加依赖管理，强制统一管理Spring依赖版本，swag
         </dependencies>
     </dependencyManagement>
 
+Q8 访问端点/api/product/id以及/api/product时正常，访问/api/product/则抛出异常
+A8 添加WebConfig网页配置类，允许路径以'/'为结尾
+
+Q9 运行ProductControllerTest测试类时，增改查以及分页功能正常，删除功能测试未通过
+A9 Mockito模拟删除商品对象时遗漏返回值，补充thenReturn(null)
+
+Q10 运行ProductServiceTest测试类时，增改查以及分页功能正常，删除功能测试未通过
+A10 Mockito检测到多余的stubbing，删除对应代码行
