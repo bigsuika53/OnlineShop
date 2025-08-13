@@ -51,3 +51,16 @@ A9 Mockito模拟删除商品对象时遗漏返回值，补充thenReturn(null)
 
 Q10 运行ProductServiceTest测试类时，增改查以及分页功能正常，删除功能测试未通过
 A10 Mockito检测到多余的stubbing，删除对应代码行
+
+Q11 启用Spring Security依赖后，swagger文档工作异常，抛出NoResourceFoundError
+A11 访问****/swagger-ui.html时会定向至****/swagger-ui/index.html，此时一切正常
+    而访问****/swagger-ui/index.html/时则会出现该错误
+
+Q12 启用Spring Security依赖并更新SecurityConfig后，H2-console可以正常登录但不显示数据库页面
+A12 H2-console需要使用frame，因此添加.headers(headers -> headers.frameOptions().disable())允许H2控制台使用frame
+
+Q13 JWT用户认证系统搭建完成后，H2-console正常使用，swagger-ui显示Failed to load remote configuration
+    访问商品节点，用户节点等操作报错403 Forbidden
+A13 设置放行节点时，swagger的doc路径设置有误
+    User类的getAuthorities()方法返回了一个空对象，使用token访问节点时未在token前加前缀Bearer
+

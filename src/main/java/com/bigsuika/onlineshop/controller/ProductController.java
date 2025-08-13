@@ -36,7 +36,7 @@ public class ProductController {
     @Operation(summary = "get all products by page")
     @GetMapping("/page")
     public Page<Product> findAllPage
-            (@Parameter(description = "page", example = "0")
+            (@Parameter(description = "page(start from 0)", example = "0")
              @RequestParam(defaultValue = "0") int page,
 
              @Parameter(description = "NumOfProducts per page", example = "10")
