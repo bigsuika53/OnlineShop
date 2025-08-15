@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
-@Tag(name = "Product API", description = "OnlineShop API")
+@Tag(name = "Product API")
 public class ProductController {
 
     private final ProductService productService;
@@ -27,13 +27,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @Operation(summary = "get all products")
+    @Operation(summary = "Get all products")
     @GetMapping
     public List<Product> findAll() {
         return productService.getAllProducts();
     }
 
-    @Operation(summary = "get all products by page")
+    @Operation(summary = "Get all products by page")
     @GetMapping("/page")
     public Page<Product> findAllPage
             (@Parameter(description = "page(start from 0)", example = "0")
@@ -44,14 +44,15 @@ public class ProductController {
         return productService.getAllProducts(Pageable.ofSize(size).withPage(page));
     }
 
-    @Operation(summary = "find product by id")
+    @Operation(summary = "Find product by id")
     @GetMapping("/{id}")
     public Product findProductById(@Parameter(description = "product id", required = true, example = "1")
                                    @PathVariable Long id){
         return productService.getProductById(id);
     }
 
-    @Operation(summary = "create new product")
+    @Operation(summary = "Create new product",
+            description = "The id part is generated using Strategy=IDENTITY, just ignore")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(
@@ -60,7 +61,7 @@ public class ProductController {
         return productService.createProduct(product);
     }
 
-    @Operation(summary = "edit exist product")
+    @Operation(summary = "Edit exist product")
     @PutMapping("/{id}")
     public Product updateProduct(
             @Parameter(description = "product id", required = true, example = "1")
@@ -70,7 +71,7 @@ public class ProductController {
             @RequestBody Product product){
     return  productService.updateProduct(id, product);}
 
-    @Operation(summary = "delete exist product")
+    @Operation(summary = "Delete exist product")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(

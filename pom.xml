@@ -118,6 +118,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!--   Redis   -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!-- ===== 测试依赖 ===== -->
         <!--   JUnit等测试支持   -->
         <dependency>
@@ -150,22 +156,6 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!--   UI自动化测试框架   -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.15.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!--   UI自动化测试框架   -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.15.0</version>
             <scope>test</scope>
         </dependency>
 

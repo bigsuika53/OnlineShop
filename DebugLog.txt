@@ -1,13 +1,13 @@
-Q1 创建项目后，错误: 找不到或无法加载主类 com.bigsuika.onlineshop.OnlineShopApplication
-A1 pom.xml中配置springdoc时误删版本号，Maven未能正确管理该依赖，导致项目报错
+Q1 创建项目后, 错误: 找不到或无法加载主类 com.bigsuika.onlineshop.OnlineShopApplication
+A1 pom.xml中配置springdoc时误删版本号, Maven未能正确管理该依赖, 导致项目报错
 
-Q2 配置H2数据库时，访问端口重定向到固定页面/login
+Q2 配置H2数据库时, 访问端口重定向到固定页面/login
 A2 pom.xml中暂时注释掉spring security依赖项
 
 Q3 将项目上传至git时报错fatal: unable to access URL: Recv failure: Connection was reset
 A3 使用github token登录
 
-Q4 创建data.sql初始化数据库时，报错找不到表格product
+Q4 创建data.sql初始化数据库时, 报错找不到表格product
 A4 在application.properties中添加数据库初始化配置
 
 Q5 运行测试ProductControllerTest时报错
@@ -17,12 +17,12 @@ Q5 运行测试ProductControllerTest时报错
         Error message = No static resource api/products.
 A5 ProductControllerTest中测试路径("/api/products")与ProductController中路径("/api/product")不一致
 
-Q6 使用id查询商品功能不正常，当使用非法id查询商品时，报错为全局报错，应当报错“product not found"
+Q6 使用id查询商品功能不正常, 当使用非法id查询商品时, 报错为全局报错, 应当报错“product not found"
 A6 控制层ProductController中@GetMapping("/page/{id}")注解应为@GetMapping("/{id}")
 
-Q7 添加全局异常处理功能后，swagger-ui无法正常访问，报错:Fetch error response status is 500 /api-docs
-    Q7-1 确认为GlobalExceptionHandler引起，初步判断为版本不兼容导致ControllerAdvice Bean与Swagger冲突
-A7 在pom.xml中添加依赖管理，强制统一管理Spring依赖版本，swagger-ui正常显示
+Q7 添加全局异常处理功能后, swagger-ui无法正常访问, 报错:Fetch error response status is 500 /api-docs
+    Q7-1 确认为GlobalExceptionHandler引起, 初步判断为版本不兼容导致ControllerAdvice Bean与Swagger冲突
+A7 在pom.xml中添加依赖管理, 强制统一管理Spring依赖版本, swagger-ui正常显示
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -43,24 +43,42 @@ A7 在pom.xml中添加依赖管理，强制统一管理Spring依赖版本，swag
         </dependencies>
     </dependencyManagement>
 
-Q8 访问端点/api/product/id以及/api/product时正常，访问/api/product/则抛出异常
-A8 添加WebConfig网页配置类，允许路径以'/'为结尾
+Q8 访问端点/api/product/id以及/api/product时正常, 访问/api/product/则抛出异常
+A8 添加WebConfig网页配置类, 允许路径以'/'为结尾
 
-Q9 运行ProductControllerTest测试类时，增改查以及分页功能正常，删除功能测试未通过
-A9 Mockito模拟删除商品对象时遗漏返回值，补充thenReturn(null)
+Q9 运行ProductControllerTest测试类时, 增改查以及分页功能正常, 删除功能测试未通过
+A9 Mockito模拟删除商品对象时遗漏返回值, 补充thenReturn(null)
 
-Q10 运行ProductServiceTest测试类时，增改查以及分页功能正常，删除功能测试未通过
-A10 Mockito检测到多余的stubbing，删除对应代码行
+Q10 运行ProductServiceTest测试类时, 增改查以及分页功能正常, 删除功能测试未通过
+A10 Mockito检测到多余的stubbing, 删除对应代码行
 
-Q11 启用Spring Security依赖后，swagger文档工作异常，抛出NoResourceFoundError
-A11 访问****/swagger-ui.html时会定向至****/swagger-ui/index.html，此时一切正常
+Q11 启用Spring Security依赖后, swagger文档工作异常, 抛出NoResourceFoundError
+A11 访问****/swagger-ui.html时会定向至****/swagger-ui/index.html, 此时一切正常
     而访问****/swagger-ui/index.html/时则会出现该错误
 
-Q12 启用Spring Security依赖并更新SecurityConfig后，H2-console可以正常登录但不显示数据库页面
-A12 H2-console需要使用frame，因此添加.headers(headers -> headers.frameOptions().disable())允许H2控制台使用frame
+Q12 启用Spring Security依赖并更新SecurityConfig后, H2-console可以正常登录但不显示数据库页面
+A12 H2-console需要使用frame, 因此添加.headers(headers -> headers.frameOptions().disable())允许H2控制台使用frame
 
-Q13 JWT用户认证系统搭建完成后，H2-console正常使用，swagger-ui显示Failed to load remote configuration
-    访问商品节点，用户节点等操作报错403 Forbidden
-A13 设置放行节点时，swagger的doc路径设置有误
-    User类的getAuthorities()方法返回了一个空对象，使用token访问节点时未在token前加前缀Bearer
+Q13 JWT用户认证系统搭建完成后, H2-console正常使用, swagger-ui显示Failed to load remote configuration
+    访问商品节点, 用户节点等操作报错403 Forbidden
+A13 设置放行节点时, swagger的doc路径设置有误
+    User类的getAuthorities()方法返回了一个空对象, 使用token访问节点时未在token前加前缀Bearer
 
+Q14 添加Redis依赖以及相关配置, 并创建RedisCartService后, 启动springboot报错
+    Parameter 1 of constructor in com.bigsuika.onlineshop.service.RedisCartService
+    required a bean of type 'org.springframework.data.redis.core.HashOperations' that could not be found
+A14 redis需要HashOperations的Bean对象实例, 而在Redis Config中, 错误地将该Bean对象定义为
+    HashOperations<String, String, User>（错误地自动填充了User类）, 将User修改为Object
+
+Q15 启动应用后, 在Swagger-ui内尝试访问节点"/api/cart", 报错Error: response status is 500 Unable to connect to Redis
+A15 RedisConfig配置有误, 应让RedisTemplate自动获取HashOperations对象, 同时, 由于redis在存储对象时需要序列化以及反序列化,
+    需要在CartItem中添加序列化支持
+
+A16 优化了swagger-ui中各模块的描述
+
+A17 启动项目时如果连接Redis失败则报错并退出
+
+Q18 由于ProductControllerTest需要使用MockMvc模拟HTTP请求, 而JWT已开启的情况下, 原有测试代码显然不能通过权限验证
+A18 添加一个改进的ProductControllerTestWithJWT, 生成一个有效的JWT token并写入http请求头
+
+A19 添加了selenium自动化测试模块

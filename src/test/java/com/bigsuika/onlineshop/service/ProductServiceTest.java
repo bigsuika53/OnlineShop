@@ -1,5 +1,6 @@
 package com.bigsuika.onlineshop.service;
 
+import com.bigsuika.onlineshop.exception.QueryException;
 import com.bigsuika.onlineshop.model.Product;
 import com.bigsuika.onlineshop.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -72,6 +74,16 @@ public class ProductServiceTest {
         productRepository.deleteById(100L);
 
         verify(productRepository).deleteById(100L);
+    }
+
+    // ProductServiceIdNotFound unit test
+    @Test
+    public void PSGid_NotFound_Test() {
+        when(productRepository.findById(999L)).thenReturn(Optional.empty());
+
+        assertThrows(QueryException.class, () -> {
+            productService.getProductById(999L);
+        });
     }
 
 }
