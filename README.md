@@ -70,3 +70,9 @@ mvn test
 - JwtTokenUtilTest: Token validation tests
 - ProductServiceTest: Service layer logic
 - ProductControllerWithJwtTest: Secure endpoint tests
+
+## Note
+There is an outdated test file in the project ,/src/test/java/com.bigsuika.onlineshop/controller/ProductControllerTest.java, that does not work when JWT authentication is turned on, so it can be deleted
+
+## Acknowledgement
+Myself
