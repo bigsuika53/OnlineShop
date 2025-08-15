@@ -13,8 +13,7 @@
 - Integrated H2 in-memory DB + Redis caching
 
 ## Tech Stack
-# Category	       |  Technologies
-                   |
+### Category	       |  Technologies
 - Backend	       |  Spring Boot 3.x
 - Security	       |  Spring Security + JWT
 - Database	       |  H2 (In-memory)
@@ -25,28 +24,28 @@
 - Serialization	   |  Jackson
 
 ## Features
-# User Authentication
+### User Authentication
   - JWT token generation/validation
   - Secure endpoint access control
-# Product Management
+### Product Management
   - CRUD operations
   - Paginated queries
-# Shopping Cart
+### Shopping Cart
   - Add/remove items
   - Quantity updates
   - Cart clearance
   - Redis-backed implementation
-# User Management
+### User Management
   - User list retrieval
 
 ## Quick Start
-# Clone repository
+### Clone repository
 git clone https://github.com/yourusername/online-shop.git
-# Start Redis (ensure port 6379 available)
+### Start Redis (ensure port 6379 available)
 redis-server
-# Build & run
+### Build & run
 mvn spring-boot:run
-# Access application
+### Access application
 http://localhost:8088
 
 ## API Documentation
@@ -54,10 +53,10 @@ http://localhost:8088
 ![img.png](img.png)
 
 ## Running Tests
-# Run all tests
+### Run all tests
 mvn test
 
-# Key test cases:
+### Key test cases:
 - ProductControllerTest: Product API tests
 - JwtTokenUtilTest: Token validation tests
 - ProductServiceTest: Service layer logic
