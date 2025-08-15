@@ -39,14 +39,14 @@
   - User list retrieval
 
 ## Quick Start
-### Clone repository
-git clone https://github.com/yourusername/online-shop.git
-### Start Redis (ensure port 6379 available)
-redis-server
-### Build & run
-mvn spring-boot:run
-### Access application
-http://localhost:8088
+  * #Clone repository
+  * git clone https://github.com/yourusername/online-shop.git
+  * #Start Redis (ensure port 6379 available)
+  * redis-server
+  * #Build & run
+  * mvn spring-boot:run
+  * #Access application
+  * http://localhost:8088
 
 ## API Documentation
 - Access Swagger UI:http://localhost:8088/swagger-ui.html
