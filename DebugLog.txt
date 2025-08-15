@@ -80,5 +80,3 @@ A17 启动项目时如果连接Redis失败则报错并退出
 
 Q18 由于ProductControllerTest需要使用MockMvc模拟HTTP请求, 而JWT已开启的情况下, 原有测试代码显然不能通过权限验证
 A18 添加一个改进的ProductControllerTestWithJWT, 生成一个有效的JWT token并写入http请求头
-
-A19 添加了selenium自动化测试模块
